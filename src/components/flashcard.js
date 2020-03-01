@@ -19,7 +19,10 @@ const FlashCard = ({
       { !end ?
           <div 
             className="flashContainer"
-            onClick={()=>setSide(!side)}
+            onClick={()=>{
+              setSide(!side)
+              console.log('I hit next side!');
+            }}
           >
             {
               !side ?
@@ -39,7 +42,8 @@ const FlashCard = ({
              className="right"
              onClick={()=>{
                slice();
-               rIdx();
+               setSide(false);
+               console.log('side nextCard', side);
              }}
             > Next </div>
           </div>
@@ -47,8 +51,9 @@ const FlashCard = ({
         <div id="restart"
           onClick={()=>{
             setSide(false);
-            console.log('side', side);
+            console.log('side restart', side);
             resetCards();
+            //rIdx();
           }}
         > Click to Restart </div>
       }

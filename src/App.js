@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button } from 'react-bootstrap';
 import logo from './logo.svg';
 import './App.css';
-
+import {shuffle} from './helpers';
 import AddCard from './components/addCard.js';
 import FlashCard from './components/flashcard.js';
 
@@ -16,28 +16,30 @@ const App = () => {
 
   const slice = () => {
       let tpArr = cardArr;
-      console.log('tpArr', tpArr);
       let temp = tpArr.splice(idx, 1);
-      console.log('temp', temp);
       setTempArr([...tempArr, ...temp]);
       setCardArr([...tpArr]);
+      console.log('tpArr', tpArr);
       if(tpArr.length===0) setEnd(true);
   }
 
   const addFlash =(answer, question) => {
     setCardArr([...cardArr, {answer, question}]); 
   }
+  console.log('add card', cardArr);
   const exit = () => {
     if(cardArr.length > 0) {
       setFlash(true);
     }
   }
   const rIdx = () => {
-    let id = (Math.floor(Math.random() * cardArr.length));
-    setIdx(id);
+    let newArr = shuffle(cardArr);
+    setCardArr([...newArr]); 
   }
+
   const resetCards =()=>{
-    setCardArr([...tempArr])
+    let newTempArr = shuffle(tempArr);
+    setCardArr([...newTempArr])
     setTempArr([]);
     setEnd(false);
   }
@@ -50,22 +52,25 @@ const App = () => {
         > + Add Card</Button>
        <Button 
         variant="danger"
-        onClick={()=>setCardArr([])}
+        onClick={()=>{
+          setCardArr([])
+          setFlash(false)
+        }}
         >Clear All Cards</Button>
       </div>
      <div className="mainContainer">
        { 
          showFlash ?
           <FlashCard 
-            answer={cardArr.length > 0 ? cardArr[idx].answer : null} 
-            question={cardArr.length > 0 ? cardArr[idx].question: null}
+            answer={cardArr[0] ? cardArr[0].answer:null} 
+            question={cardArr[0] ? cardArr[0].question:null}
             rIdx={rIdx}
             slice={slice}
             end={end}
             resetCards={resetCards}
          />
          :
-          <AddCard addCard={addFlash} exit={exit}/> 
+          <AddCard addCard={addFlash} exit={exit} rIdx={rIdx}/> 
 
        }
     </div>

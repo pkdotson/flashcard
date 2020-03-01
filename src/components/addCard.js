@@ -2,12 +2,15 @@ import React, {useState} from 'react';
 import  { Button, Form } from 'react-bootstrap'
 import '../App.css'
 
-const AddFlashCard = ({addCard, exit}) => {
+const AddFlashCard = ({addCard, exit, rIdx}) => {
   const [answer, setAnswer] = useState('');
   const [question, setQuestion] = useState('');
   return(
     <div className="form">
-      <div className="exit" onClick={exit}>[X]</div>
+      <div className="exit" onClick={()=>{
+        rIdx(false)
+        exit()  
+        }}>[X]</div>
       <Form.Control 
         size="lg" 
         type="text" 
@@ -35,7 +38,7 @@ const AddFlashCard = ({addCard, exit}) => {
           alert('Your card has been added!')
         }}
         >
-        Submit
+        Add flashcard to List 
       </Button>
     </div>
   )
