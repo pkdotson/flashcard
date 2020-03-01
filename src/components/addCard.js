@@ -13,7 +13,7 @@ const AddFlashCard = ({addCard, exit, rIdx}) => {
         }}>[X]</div>
       <Form.Control 
         size="lg" 
-        type="text" 
+        type="questionText" 
         value={question}
         placeholder="Enter Question" 
         className="flashInput"
@@ -21,7 +21,7 @@ const AddFlashCard = ({addCard, exit, rIdx}) => {
       />      
       <Form.Control 
         size="lg" 
-        type="text" 
+        type="answerText" 
         placeholder="Enter Answer" 
         value={answer}
         className="flashInput"
