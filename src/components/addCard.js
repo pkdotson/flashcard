@@ -2,15 +2,24 @@ import React, {useState} from 'react';
 import  { Button, Form } from 'react-bootstrap'
 import '../App.css'
 
-const AddFlashCard = ({addCard, exit, rIdx}) => {
+const AddFlashCard = ({addCard, exit, shuffleCard, cardArr}) => {
   const [answer, setAnswer] = useState('');
   const [question, setQuestion] = useState('');
+  console.log('cardArr', cardArr);
   return(
     <div className="form">
-      <div className="exit" onClick={()=>{
-        rIdx(false)
-        exit()  
-        }}>[X]</div>
+      <div className="exit" 
+        onClick={()=>{
+          shuffleCard()
+          exit()  
+        }}>
+        {
+          cardArr.length===0 ?
+          'Please enter cards into your list'
+          :
+          'Click To Go Practice!'
+        }
+      </div>
       <Form.Control 
         size="lg" 
         type="questionText" 
@@ -42,6 +51,10 @@ const AddFlashCard = ({addCard, exit, rIdx}) => {
       </Button>
     </div>
   )
+}
+
+AddFlashCard.defaultProps = {
+  cardArr: []
 }
 
 export default AddFlashCard;

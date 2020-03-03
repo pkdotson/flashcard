@@ -11,24 +11,42 @@ describe('FlashCard', ()=> {
     shallow(<FlashCard/>) 
   });
 
-  it('simulates click events', () => {
+  it('simulates nextCArd click events', () => {
     const onButtonClick = sinon.spy();
-    const wrapper = shallow(<FlashCard onButtonClick={onButtonClick} />);
-    console.log('fron', wrapper.find('front'));
-    wrapper.find('front').simulate('click');
+    const wrapper = mount(<FlashCard nextCard={onButtonClick} />);
+    wrapper.find('.next').simulate('click');
+    expect(onButtonClick).to.have.property('callCount', 1);
+  }); 
+  
+  it('simulates flipCard click events', () => {
+    const onButtonClick = sinon.spy();
+    const wrapper = mount(<FlashCard flipCard={onButtonClick} />);
+    wrapper.find('.sides').simulate('click');
     expect(onButtonClick).to.have.property('callCount', 1);
   }); 
 
-  it('renders children when passed in', () => {
-    const wrapper = shallow((
-      <FlashCard>
-        <div 
-            className="flashContainer"
-          >
-        </div>
-      </FlashCard>
-    ));
-    expect(wrapper.contains(<div className="unique" />)).to.equal(true);
+  it('should render answer when side is true', () => {
+    const wrapper = mount(
+      <FlashCard 
+        answer={'answer'} 
+        question={'question'}
+        side={true}
+      />
+    );
+    const side = wrapper.find('.front');
+    expect(side.text()).to.equal('answer');
   });
-  
+
+   it('should render question when side is false', ()=> {
+     const wrapper = mount(
+        <FlashCard 
+          answer={'answer'}
+          question={'question'}
+          side={false}
+        />
+     );
+    const side = wrapper.find('.front');
+    expect(side.text()).to.equal('questionclick to see answer');
+ 
+   });
  });

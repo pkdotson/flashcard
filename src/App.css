@@ -1,7 +1,11 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background-color: #282c34;
+  background-color: #282c34cc;
+}
+
+.btn {
+  background-color: transparent;
 }
 
 .btnApps{
@@ -13,8 +17,13 @@
 .click {
   color: #d2cfcf;
 }
+
 .mainContainer {
   margin-top: 50px;
+}
+
+#clearBtn {
+ margin-left: 10px;
 }
 
 .flashcard {
@@ -36,6 +45,10 @@
   margin-top: 25px;
 }
 
+.sides {
+  height: 90%
+}
+
 .front {
   padding-top: 25px;
   height: 90%;
@@ -46,7 +59,7 @@
 
 .form {
   margin-top: 50px;
-  background-color: green;
+  background-color: #8ce8f736;
   height:90%;
   margin: auto;
   padding: 25px;
@@ -72,6 +85,7 @@
   float: right;
   font-size: 25px;
   cursor: pointer;
+  color: ghostwhite;
 }
 
 #restart {
